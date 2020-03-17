@@ -1,30 +1,31 @@
 package com.example.mvvmwithoutarch.login;
 
 import com.example.mvvmwithoutarch.CommonActivityState;
-import com.example.mvvmwithoutarch.commonOvserver;
 
+import com.example.mvvmwithoutarch.commonOvserver;
 public class LoginViewModel implements  LoginInteractor.OnLoginFinishedListener{
 
-    public com.example.mvvmwithoutarch.commonOvserver commonOvserver =new commonOvserver();
+    public commonOvserver commonOvserver =new commonOvserver();
+
 
     public void setLoginClicked(String uname, String pass) {
-        commonOvserver.setState(CommonActivityState.Loading);
-        new LoginInteractor().login(uname,pass,this);
+        commonOvserver.setState(CommonActivityState.Loading,true);
+        new LoginInteractor().login(uname,pass, this);
 
     }
 
     @Override
     public void onUsernameError() {
-        commonOvserver.setState(CommonActivityState.WrongUserName);
+        commonOvserver.setState(CommonActivityState.WrongUserName,true);
     }
 
     @Override
     public void onPasswordError() {
-       commonOvserver.setState(CommonActivityState.WrongPassword);
+       commonOvserver.setState(CommonActivityState.WrongPassword,true);
     }
 
     @Override
     public void onSuccess() {
-      commonOvserver.setState(CommonActivityState.Success);
+      commonOvserver.setState(CommonActivityState.Success,true);
     }
 }

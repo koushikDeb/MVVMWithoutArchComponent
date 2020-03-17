@@ -2,6 +2,7 @@ package com.example.mvvmwithoutarch.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.example.mvvmwithoutarch.CommonActivityState;
 import com.example.mvvmwithoutarch.R;
 import com.example.mvvmwithoutarch.commonOvserver;
+import com.example.mvvmwithoutarch.notes.MainActivity;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -42,6 +44,7 @@ LoginViewModel viewModel=new LoginViewModel();
         progress.setVisibility(observable.getState() == CommonActivityState.Loading ? View.VISIBLE : View.INVISIBLE);
         if(observable.getState()== CommonActivityState.Success) {
             Toast.makeText(getApplicationContext(),"Successfully Loged in",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, MainActivity.class));
         }else {
             password.setError(observable.getState() == CommonActivityState.WrongPassword ? "Wrong password" : null);
             username.setError(observable.getState() == CommonActivityState.WrongUserName ? "Wrong userName" :null);

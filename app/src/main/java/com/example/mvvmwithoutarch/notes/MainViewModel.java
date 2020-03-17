@@ -9,22 +9,22 @@ import java.util.ArrayList;
 public class MainViewModel implements  NotesInteractor.notesListner{
 
     public commonOvserver commonOvserver =new commonOvserver();
-
-    public void setLoginClicked(String imei) {
-        commonOvserver.setState(CommonActivityState.Loading);
-        new NotesInteractor().add(uname,pass,this);
-
+    ArrayList<String> notes=new ArrayList();
+    public void addclickedmodel() {
+        commonOvserver.setState(CommonActivityState.Loading,true);
+        new NotesInteractor().add(this,notes);
     }
-
 
     @Override
     public void noteFetched(ArrayList<String> notes) {
-
+        this.notes=notes;
+        commonOvserver.setState(CommonActivityState.Success,true);
+        commonOvserver.setState(notes,false);
     }
 
     @Override
     public void notefetchfail() {
-
+        commonOvserver.setState(CommonActivityState.FAILED,true);
     }
 
     @Override

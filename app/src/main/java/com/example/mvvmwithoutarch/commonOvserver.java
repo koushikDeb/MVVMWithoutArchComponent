@@ -7,27 +7,18 @@ import java.util.Observable;
 
 public class commonOvserver extends Observable {
 
-    CommonActivityState state;
-    ArrayList<String> notes=new ArrayList<>();
 
-    public void setState(CommonActivityState state) {
+  Object state;
+
+    public void setState(Object state,boolean isActivityState) {
         this.state = state;
         setChanged();
-        notifyObservers(state);
+        notifyObservers(isActivityState);
 
     }
 
-    public void setNotes(ArrayList<String> notes) {
-        this.notes = notes;
-        setChanged();
-        notifyObservers(notes);
-    }
 
-    public ArrayList<String> getNotes() {
-        return notes;
-    }
-
-    public CommonActivityState getState() {
+    public Object getState() {
         return state;
     }
 }
